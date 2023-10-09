@@ -6,6 +6,9 @@ const workingAreaWidth = workingArea.offsetWidth
 //for testing, square for drawing = width/16
 const sizeSquare = workingAreaWidth/17
 
+const eraser = document.querySelector(".borrador")
+const draw = document.querySelector(".pintar")
+
 for (let i=0; i<17*17; i++) {    
 
     const newSquare = document.createElement("div")
@@ -17,11 +20,21 @@ for (let i=0; i<17*17; i++) {
 }
 
 const square = document.querySelectorAll(".working-area div")
-console.log(square)
 
-square.forEach(element => {
-    element.addEventListener("mouseenter", () => {
-        element.style.backgroundColor = "red"
+draw.addEventListener("click", function () {
+    square.forEach(element => {
+        element.addEventListener("mouseenter", () => {
+            element.style.backgroundColor = "black"
+        })
+    })
+})
+
+
+eraser.addEventListener("click", function () {
+    square.forEach(element => {
+        element.addEventListener("mouseenter", () => {
+            element.style.backgroundColor = "white"
+        })
     })
 })
 
