@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin-left: auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.separador {
+  margin-top: 30px;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.working-area {
+  width: 800px;
+  height: 800px;
+  outline: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+}/*# sourceMappingURL=style.css.map */
