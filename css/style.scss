@@ -13,7 +13,7 @@ h1, p {
     text-align: center;
 }
 
-.separador {
+.separator {
     margin-top: 30px;
 }
 
@@ -25,10 +25,11 @@ h1, p {
 }
 
 .working-area {
-    width: 800px;
-    height: 800px;
+    width: 600px;
+    height: 600px;
     outline: 1px solid black;
+}
 
-    display: flex;
-    flex-wrap: wrap;
+.grid {
+    border: 1px solid black
 }

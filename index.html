@@ -10,13 +10,26 @@
     <h1>Etch a Sketch!</h1>
     <p>Press draw to begin!</p>
 
-    <div class="container separador">
-        <div class="working-area"></div>
+    <div class="container slidecontainer separator">
+        <input type="range" min="16" max="100" value="16" class="slider" id="myRange">
+    </div>
+        <div class="container grid-size">16x16</div>
+
+        <div class="separator container">
+            <button class="toggle">Toggle Grid</button>
+        </div>
+     
+
+    <div class="container separator">
+        <div class="working-area">
+           
+        </div>
     </div>
 
-    <div class="container separador">
-        <button class="pintar">Draw</button>
-        <button class="borrador">Borrador</button>
+    <div class="container separator">
+        <span>Pick a color!</span><input class="selected-color" type="color">
+        <button class="draw">Draw</button>
+        <button class="eraser">Eraser</button>
         <button class="multicolor">Multicolor</button>
         <button class="clear">Clear</button>
     </div>

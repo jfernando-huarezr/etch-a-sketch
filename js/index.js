@@ -1,61 +1,102 @@
-//obtain the working area
+const sliderGridSize = document.querySelector("#myRange")
+const showGridSize = document.querySelector(".grid-size")
 const workingArea = document.querySelector(".working-area")
+const selectColor = document.querySelector(".selected-color")
+const toggleGridButton = document.querySelector(".toggle")
 
-//obtain the width of the working area (is the same as the height in this case)
-const workingAreaWidth = workingArea.offsetWidth
-//for testing, square for drawing = width/16
+let color = selectColor.value
 
-let gridSize = 60
-const sizeSquare = workingAreaWidth/gridSize
-
-const eraser = document.querySelector(".borrador")
-const draw = document.querySelector(".pintar")
-const multicolor = document.querySelector(".multicolor")
-const clear = document.querySelector(".clear")
-
-
-for (let i=0; i<gridSize*gridSize; i++) {    
-
-    const newSquare = document.createElement("div")
-    newSquare.style.width = `${sizeSquare}px`
-    newSquare.style.height = `${sizeSquare}px`
-    newSquare.style.border = `1px solid black`
-
-    workingArea.appendChild(newSquare)
-}
-
-const square = document.querySelectorAll(".working-area div")
-
-draw.addEventListener("click", function () {
-    square.forEach(element => {
-        element.addEventListener("mouseenter", () => {
-            element.style.backgroundColor = "black"
-        })
-    })
+selectColor.addEventListener("change", () => {
+    color = selectColor.value
 })
 
-
-eraser.addEventListener("click", function () {
-    square.forEach(element => {
-        element.addEventListener("mouseenter", () => {
-            element.style.backgroundColor = "white"
-        })
-    })
+sliderGridSize.addEventListener("input", function (){
+    showGridSize.textContent= `${sliderGridSize.value}x${sliderGridSize.value}`
 })
 
-multicolor.addEventListener("click", function () {
+sliderGridSize.addEventListener("change", function () {
+    const gridSize = sliderGridSize.value
+    workingArea.removeChild(workingArea.firstElementChild)
+    drawing(gridSize)
+})
 
-    square.forEach(element => {
-        element.addEventListener("mouseenter", () => {
-            element.style.backgroundColor = "#"+Math.floor(Math.random()*16777215).toString(16)
-        })
+toggleGridButton.addEventListener("click", () => {
+    const grid = document.querySelectorAll(".working-area div div")
+
+    grid.forEach( element => {
+        element.classList.toggle("grid")
     })
     
 })
 
-clear.addEventListener("click", function () {
-    square.forEach(element => {
-        element.style.backgroundColor = "white"
+
+function drawing (gridSize) {
+    
+    const workingAreaChild = document.createElement("div")
+    workingAreaChild.style.display = "flex"
+    workingAreaChild.style.flexWrap = "wrap"
+
+    const workingAreaWidth = workingArea.offsetWidth
+
+    const eraserButton = document.querySelector(".eraser")
+    const drawButton = document.querySelector(".draw")
+    const multicolorButton = document.querySelector(".multicolor")
+    const clearButton = document.querySelector(".clear")
+
+    const sizeSquare = workingAreaWidth/gridSize
+    const fragment = document.createDocumentFragment()
+
+    for (let i=0; i<gridSize*gridSize; i++) {    
+
+        const newSquare = document.createElement("div")
+        newSquare.style.width = `${sizeSquare}px`
+        newSquare.style.height = `${sizeSquare}px`
+        newSquare.setAttribute("class", "grid")
+
+        fragment.appendChild(newSquare)
+    }
+
+
+    workingAreaChild.appendChild(fragment)
+    workingArea.appendChild(workingAreaChild)
+
+    const square = document.querySelectorAll(".working-area div div")
+
+    drawButton.addEventListener("click", function () {
+        square.forEach(element => {
+            element.addEventListener("mouseenter", () => {
+                element.style.backgroundColor = color
+            })
+        })
     })
-})
+
+
+    eraserButton.addEventListener("click", function () {
+        square.forEach(element => {
+            element.addEventListener("mouseenter", () => {
+                element.style.backgroundColor = "white"
+            })
+        })
+    })
+
+    multicolorButton.addEventListener("click", function () {
+
+        square.forEach(element => {
+            element.addEventListener("mouseenter", () => {
+                element.style.backgroundColor = "#"+Math.floor(Math.random()*16777215).toString(16)
+            })
+        })
+        
+    })
+
+    clearButton.addEventListener("click", function () {
+        square.forEach(element => {
+            element.style.backgroundColor = "white"
+        })
+    })
+
+}
+
+drawing(16)
+
 
